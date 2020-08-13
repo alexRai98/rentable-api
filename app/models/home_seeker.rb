@@ -1,0 +1,3 @@
+class HomeSeeker < User
+    
+end

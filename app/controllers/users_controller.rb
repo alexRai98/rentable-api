@@ -32,7 +32,4 @@ class UsersController < ApplicationController
     params.permit(:email,:phone ,:name, :password)
   end
 
-  # def user_patch_params
-  #   params.permit(:name, :phone)
-  # end
 end
