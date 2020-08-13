@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:create]
 
-  
   def show
     render json: current_user
   end
