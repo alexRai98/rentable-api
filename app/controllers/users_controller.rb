@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:create]
 
-  
   def show
     render json: current_user
   end
@@ -32,7 +31,4 @@ class UsersController < ApplicationController
     params.permit(:email,:phone ,:name, :password)
   end
 
-  # def user_patch_params
-  #   params.permit(:name, :phone)
-  # end
 end

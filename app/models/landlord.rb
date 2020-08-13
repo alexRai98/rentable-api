@@ -1,0 +1,3 @@
+class Landlord < User
+    
+end
