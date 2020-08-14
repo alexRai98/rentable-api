@@ -3,10 +3,14 @@ class User < ApplicationRecord
 
   has_secure_password
   has_secure_token
-
   
   validates_format_of :name, with: /\A[^0-9`!@#\$%\^&*+_=]+\z/
   validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  #associations
+  has_many :properties
+  has_many :favorites
+  has_many :favorited_properties, through: :favorites, source: :property
 
   def invalidate_token
     update(token: nil)

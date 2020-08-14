@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_141731) do
+ActiveRecord::Schema.define(version: 2020_08_14_011651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.boolean "favorite"
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_favorites_on_property_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.integer "operation_type"
+    t.string "addres"
+    t.float "monthly_rent"
+    t.float "maintenance"
+    t.integer "property_type"
+    t.integer "bedrooms"
+    t.integer "bathrooms"
+    t.float "area"
+    t.string "apartment_amenities", default: [], array: true
+    t.string "building_amenities", default: [], array: true
+    t.string "close_by", default: [], array: true
+    t.boolean "pets_allowed"
+    t.text "description"
+    t.integer "favorites_count", default: 0
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -27,4 +58,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_141731) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "favorites", "properties"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "properties", "users", column: "owner_id"
 end
