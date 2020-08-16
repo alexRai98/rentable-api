@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorited_properties, through: :favorites, source: :property
 
+
   def invalidate_token
     update(token: nil)
   end
