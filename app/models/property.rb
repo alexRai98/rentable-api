@@ -12,4 +12,5 @@ class Property < ApplicationRecord
   # validates :property_type, presence: true
 
   enum operation_type: [:sell, :rent]
+  enum property_type: [:apartment, :house]
 end
