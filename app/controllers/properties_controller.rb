@@ -3,13 +3,19 @@ class PropertiesController < ApplicationController
 
   # GET /properties
   def index
-    @properties = Property.all
+    if params[:owner_id]
+      @properties = User.find(params[:owner_id]).properties
+    else
+      @properties = Property.all
+    end
 
     render json: @properties
   end
 
   # GET /properties/1
   def show
+    @property = Property.find(params[:id])
+
     render json: @property
   end
 

@@ -8,9 +8,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   #associations
-  has_many :properties
-  has_many :favorites
-  has_many :favorited_properties, through: :favorites, source: :property
+  #has_many :properties, foreign_key: :owner_id
+  #has_many :favorites
+  #has_many :favorited_properties, through: :favorites, source: :property
 
 
   def invalidate_token
