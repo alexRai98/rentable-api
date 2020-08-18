@@ -1,5 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :update, :destroy]
+  skip_before_action :require_login, only: [:index,:show] 
 
   # GET /properties
   def index
@@ -45,13 +46,16 @@ class PropertiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def property_params
-      params.require(:property).permit(:operation_type, :addres, :monthly_rent, :maintenance, :property_type, :bedrooms, :bathrooms, :area, :apartment_amenities, :building_amenities, :close_by, :pets_allowed, :description, :favorites_count, :owner_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = Property.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def property_params
+    params.require(:property).permit(:operation_type, :addres, :monthly_rent, :maintenance,
+     :property_type, :bedrooms, :bathrooms, :area, :apartment_amenities, :building_amenities, 
+     :close_by, :pets_allowed, :description, :favorites_count, :owner_id,images:[])
+  end
 end

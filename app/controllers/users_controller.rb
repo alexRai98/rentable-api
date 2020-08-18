@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  
   skip_before_action :require_login, only: [:create]
 
   def show
     render json: current_user
+    p current_user
   end
 
   def create
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email,:phone ,:name, :password)
+    params.permit(:email,:phone ,:name, :password, :type)
   end
 
 end
