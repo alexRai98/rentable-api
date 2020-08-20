@@ -22,7 +22,7 @@ class PropertiesController < ApplicationController
 
   # POST /properties
   def create
-    @property = Property.new(property_params)
+    @property = current_user.properties.new(property_params)
 
     if @property.save
       render json: @property, status: :created, location: @property
@@ -55,7 +55,6 @@ class PropertiesController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def property_params
     params.require(:property).permit(:operation_type, :addres, :monthly_rent, :maintenance,
-     :property_type, :bedrooms, :bathrooms, :area, :apartment_amenities, :building_amenities, 
-     :close_by, :pets_allowed, :description, :favorites_count, :owner_id,images:[])
+     :property_type, :bedrooms, :bathrooms, :area, :pets_allowed, :description, :favorites_count, :owner_id,images:[], apartment_amenities:[], building_amenities:[], close_by:[])
   end
 end
