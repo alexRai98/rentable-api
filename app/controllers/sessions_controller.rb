@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.valid_login?(params[:email], params[:password])
     if user
       user.regenerate_token
-      render json: user
+      render json: user.to_json(only: [:id, :email,:name,:phone,:token ,:type])
     else
       render_unauthorized('Incorrect email or password')
     end

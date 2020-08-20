@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user.email.downcase! # avoid duplicates and case-sensitive login errors
 
     if @user.save
-      render json: @user, status: :created
+      render json: @user.to_json(only: [:id, :email,:name,:phone,:token ,:type]), status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
